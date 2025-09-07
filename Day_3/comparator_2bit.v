@@ -1,0 +1,7 @@
+module comparator_2bit(input [1:0]a,b, output lt,eq,gt);
+
+assign lt = a<b;
+assign eq = a==b;
+assign gt = a>b;
+
+endmodule
