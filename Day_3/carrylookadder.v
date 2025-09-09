@@ -1,11 +1,9 @@
 module carrylookadder(input [3:0]a,b,input cin,output [3:0]s,output cout );
 wire [3:0]p,g;
 wire [3:0]c;
-
-
+  
 assign p=a^b;
 assign g=a&b;
-
 
 assign c[0]=g[0] | (p[0]&cin);
 assign c[1]=g[1] | (p[1]&g[0])| (p[1]&p[0]&cin);
