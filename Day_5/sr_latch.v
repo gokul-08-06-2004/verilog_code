@@ -13,5 +13,5 @@ default:q=1'b0;
 endcase
 end
 assign qbar=~q;
-
 endmodule
+
