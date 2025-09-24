@@ -1,6 +1,7 @@
 module ripple_counter_4bit_tb;
 
-reg clk,rst,t;
+reg clk,rst;
+reg [3:0]t;
 wire [3:0]q;
 
 ripple_upcounter_4bit dut(clk,rst,t,q);
@@ -18,7 +19,7 @@ $dumpvars();
 rst=1;
 #10;
 rst=0;
-t=1;
+t=4'b1111;
 #200;
 $finish;
 end
