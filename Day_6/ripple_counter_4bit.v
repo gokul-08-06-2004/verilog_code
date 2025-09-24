@@ -1,19 +1,24 @@
-module t_ff(input clk,rst,t,output reg q);
+module t_ff(input clk,rst,t,output reg q,output qbar);
 
-always@(posedge clk or posedge rst)begin
+always@(negedge clk or posedge rst)begin
 
 if(rst)
 q<=0;
-else  
+else if (t)
 q<=~q;
+else
+q=0;
 end
-
+assign qbar=~q;
 endmodule 
 
-module ripple_downcounter_4bit(input clk,rst,t,output [3:0]q);
+module ripple_downcounter_4bit(input clk,rst,input [3:0]t,output [3:0]q,qbar);
 
-t_ff t1(clk,rst,t,q[0]);
-t_ff t2(q[0],rst,t,q[1]);
-t_ff t3(q[1],rst,t,q[2]);
-t_ff t4(q[2],rst,t,q[3]);
+genvar i;
+t_ff t1(clk,rst,t[0],q[0],qbar[0]);
+generate
+for(i=1;i<4;i=i+1)begin
+t_ff t2(qbar[i-1],rst,t[i],q[i],qbar[i]);
+end
+endgenerate
 endmodule
